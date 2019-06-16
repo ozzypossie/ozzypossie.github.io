@@ -22,14 +22,5 @@ M-x visual-line-mode  Add a link to a file on your computer C-u C-c C-l  Set glo
 Put this code in your init.el:</description>
     </item>
     
-    <item>
-      <title>Test</title>
-      <link>/post/2019/06/14/test/</link>
-      <pubDate>Fri, 14 Jun 2019 22:21:05 +0200</pubDate>
-      
-      <guid>/post/2019/06/14/test/</guid>
-      <description>Lets have a test.</description>
-    </item>
-    
   </channel>
 </rss>
