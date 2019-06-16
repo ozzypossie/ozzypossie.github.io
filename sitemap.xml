@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/2019/06/16/org-mode-cheat-sheet/</loc>
+    <lastmod>2019-06-16T16:34:17+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/2019/06/14/test/</loc>
     <lastmod>2019-06-14T22:21:05+02:00</lastmod>
   </url>
@@ -49,12 +54,12 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-06-14T22:21:05+02:00</lastmod>
+    <lastmod>2019-06-16T16:34:17+02:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-06-14T22:21:05+02:00</lastmod>
+    <lastmod>2019-06-16T16:34:17+02:00</lastmod>
     <priority>0</priority>
   </url>
   

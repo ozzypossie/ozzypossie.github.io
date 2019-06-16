@@ -6,10 +6,21 @@
     <description>Recent content in Home on Classic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 Jun 2019 22:21:05 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 16 Jun 2019 16:34:17 +0200</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Org-mode cheat sheet</title>
+      <link>/post/2019/06/16/org-mode-cheat-sheet/</link>
+      <pubDate>Sun, 16 Jun 2019 16:34:17 +0200</pubDate>
+      
+      <guid>/post/2019/06/16/org-mode-cheat-sheet/</guid>
+      <description>Line wrapping To make sure long sentences stay on your screen.
+M-x visual-line-mode  Add a link to a file on your computer C-u C-c C-l  Set global ID to a header to which you can reference from different a .org file Use C-c l to copy a todo with an ID, which can be pasted somewhere as reference with C-c C-l
+Put this code in your init.el:</description>
+    </item>
     
     <item>
       <title>Test</title>
