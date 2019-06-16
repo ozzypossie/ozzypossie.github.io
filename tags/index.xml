@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Classic</title>
+    <title>Tags on My personal blog</title>
     <link>/tags/</link>
-    <description>Recent content in Tags on Classic</description>
+    <description>Recent content in Tags on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Sun, 16 Jun 2019 16:34:17 +0200</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Orgmode</title>
+      <link>/tags/orgmode/</link>
+      <pubDate>Sun, 16 Jun 2019 16:34:17 +0200</pubDate>
+      
+      <guid>/tags/orgmode/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

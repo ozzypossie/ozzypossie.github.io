@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Classic</title>
+    <title>Posts on My personal blog</title>
     <link>/post/</link>
-    <description>Recent content in Posts on Classic</description>
+    <description>Recent content in Posts on My personal blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 16 Jun 2019 16:34:17 +0200</lastBuildDate>
@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>Org-mode cheat sheet</title>
-      <link>/post/2019/06/16/org-mode-cheat-sheet/</link>
+      <title>Cheat Sheet: Org-mode</title>
+      <link>/post/2019/06/16/cheat-sheet-org-mode/</link>
       <pubDate>Sun, 16 Jun 2019 16:34:17 +0200</pubDate>
       
-      <guid>/post/2019/06/16/org-mode-cheat-sheet/</guid>
+      <guid>/post/2019/06/16/cheat-sheet-org-mode/</guid>
       <description>Line wrapping To make sure long sentences stay on your screen.
 M-x visual-line-mode  Add a link to a file on your computer C-u C-c C-l  Set global ID to a header to which you can reference from different a .org file Use C-c l to copy a todo with an ID, which can be pasted somewhere as reference with C-c C-l
 Put this code in your init.el:</description>

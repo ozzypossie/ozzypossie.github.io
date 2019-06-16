@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cheat Sheet: Org-mode | My personal blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/contrib/auto-render.min.js" integrity="sha384-yACMu8JWxKzSp/C1YV86pzGiQ/l1YUfE8oPuahJQxzehAjEt2GiQuy/BIvl9KyeF" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body);
+        });
+    </script>
+
+<header>
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">/home/my personal blog</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/">~/home</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">~/categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">~/tags</a>
+      </li>
+      
+
+      
+      
+      <li class="pull-right">
+        <a href="/index.xml">~/subscribe</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+</header>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">Cheat Sheet: Org-mode</span></h1>
+
+<h2 class="date">2019/06/16</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/cheat-sheet">Cheat-sheet</a> 
+  
+  
+  
+  Tags: <a href="/tags/orgmode">orgmode</a> 
+  
+  
+</p>
+</div>
+
+
+
+<main>
+
+
+<h1 id="line-wrapping">Line wrapping</h1>
+
+<p>To make sure long sentences stay on your screen.</p>
+
+<pre><code>M-x visual-line-mode
+</code></pre>
+
+<h1 id="add-a-link-to-a-file-on-your-computer">Add a link to a file on your computer</h1>
+
+<pre><code>C-u C-c C-l
+</code></pre>
+
+<h1 id="set-global-id-to-a-header-to-which-you-can-reference-from-different-a-org-file">Set global ID to a header to which you can reference from different a .org file</h1>
+
+<p>Use <code>C-c l</code> to copy a todo with an ID, which can be pasted somewhere as
+reference with <code>C-c C-l</code></p>
+
+<p>Put this code in your <code>init.el</code>:</p>
+
+<pre><code>;; for links
+(global-set-key (kbd &quot;C-c l&quot;) 'org-store-link) ; For storing link
+;; Use global IDs
+(require 'org-id)
+(setq org-id-link-to-org-use-id t)
+
+;; Update ID file .org-id-locations on startup
+(org-id-update-id-locations)
+
+(defun my/org-add-ids-to-headlines-in-file ()
+  &quot;Add ID properties to all headlines in the current file which
+do not already have one.&quot;
+  (interactive)
+  (org-map-entries 'org-id-get-create))
+</code></pre>
+
+<h1 id="screenshots">Screenshots</h1>
+
+<p>Make screenshots inside your .org file using:</p>
+
+<pre><code>my-org-screenshot
+</code></pre>
+
+<p>On Ubuntu, this calls the program ImageMagick<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> and you can select an
+area to make a screenshot<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>. This code creates a directory for
+screenshots in the directory where your .org file lives and pastes the
+image where you called the function.</p>
+
+<p>Put this code<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup> in your <code>init.el</code>:</p>
+
+<pre><code>;; From https://stackoverflow.com/questions/17435995/paste-an-image-on-clipboard-to-emacs-org-mode-file-without-saving-it
+(defun my-org-screenshot ()
+  &quot;Take a screenshot into a time stamped unique-named file in the
+same directory as the org-buffer and insert a link to this file.&quot;
+  (interactive)
+  (setq filename
+        (concat
+         (make-temp-name
+          (concat (file-name-nondirectory (buffer-file-name))
+                  &quot;_imgs/&quot;
+                  (format-time-string &quot;%Y%m%d_%H%M%S_&quot;)) ) &quot;.png&quot;))
+  (unless (file-exists-p (file-name-directory filename))
+    (make-directory (file-name-directory filename)))
+  ; take screenshot
+  (if (eq system-type 'darwin)
+      (call-process &quot;screencapture&quot; nil nil nil &quot;-i&quot; filename))
+  (if (eq system-type 'gnu/linux)
+      (call-process &quot;import&quot; nil nil nil filename))
+  ; insert into file if correctly taken
+  (if (file-exists-p filename)
+      (insert (concat &quot;[[file:&quot; filename &quot;]]&quot;)))
+  (org-display-inline-images))
+</code></pre>
+
+<h1 id="toggle-display-of-inline-images">Toggle display of inline images</h1>
+
+<p>You can press <code>C-c C-x C-v</code> to toggle display of inline images to see it
+directly in Emacs.</p>
+
+<h1 id="embed-youtube-videos-in-html-exports">Embed Youtube videos in HTML exports</h1>
+
+<p>To use, put this in your .org file: <sup class="footnote-ref" id="fnref:4"><a href="#fn:4">4</a></sup></p>
+
+<pre><code>[[yt:dQw4w9WgXcQ]]
+</code></pre>
+
+<p>Put this code<sup class="footnote-ref" id="fnref:5"><a href="#fn:5">5</a></sup> in your <code>init.el</code>:</p>
+
+<pre><code>;; For embedding a youtube video in HTML export
+(defvar yt-iframe-format
+  ;; You may want to change your width and height.
+  (concat &quot;&lt;iframe width=\&quot;440\&quot;&quot;
+          &quot; height=\&quot;335\&quot;&quot;
+          &quot; src=\&quot;https://www.youtube.com/embed/%s\&quot;&quot;
+          &quot; frameborder=\&quot;0\&quot;&quot;
+          &quot; allowfullscreen&gt;%s&lt;/iframe&gt;&quot;))
+
+(org-add-link-type
+ &quot;yt&quot;
+ (lambda (handle)
+   (browse-url
+    (concat &quot;https://www.youtube.com/embed/&quot;
+            handle)))
+ (lambda (path desc backend)
+   (cl-case backend
+     (html (format yt-iframe-format
+                   path (or desc &quot;&quot;)))
+     (latex (format &quot;\href{%s}{%s}&quot;
+                    path (or desc &quot;video&quot;))))))
+</code></pre>
+
+<h1 id="footnotes">Footnotes</h1>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><a href="https://en.wikipedia.org/wiki/ImageMagick">Wikipedia</a>
+ <a class="footnote-return" href="#fnref:1">↩</a></li>
+<li id="fn:2">Unfortunately, this is sometimes buggy on my system.
+ <a class="footnote-return" href="#fnref:2">↩</a></li>
+
+<li id="fn:3"><p>Code from user Gilly at <a href="https://stackoverflow.com/questions/17435995/paste-an-image-on-clipboard-to-emacs-org-mode-file-without-saving-it">Stack
+Overflow</a></p>
+ <a class="footnote-return" href="#fnref:3">↩</a></li>
+
+<li id="fn:4"><p>Here <code>yt:</code> refers to <em>youtube</em> and <code>dQw4w9WgXcQ</code> is the last part
+the URL of the video</p>
+ <a class="footnote-return" href="#fnref:4">↩</a></li>
+
+<li id="fn:5"><p>Code from <a href="http://endlessparentheses.com/embedding-youtube-videos-with-org-mode-links.html">Endless
+Parentheses</a></p>
+ <a class="footnote-return" href="#fnref:5">↩</a></li>
+</ol>
+</div>
+
+</main>
+
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      Open-Source | <a href="https://github.com/goodroot/hugo-classic">Theme</a>
+      
+    </footer>
+  </body>
+</html>
+
